@@ -27,7 +27,7 @@ const Section: React.FC<ISection> = ({ name, tasks, id }): JSX.Element => {
               {...provided.draggableProps}
               {...provided.dragHandleProps}
             >
-              <Card title={task.id} />
+              <Card title={task.title} description={task.description} />
             </div>
           )}
         </Draggable>

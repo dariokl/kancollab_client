@@ -4,14 +4,13 @@ import {
   OnDragEndResponder,
 } from "@hello-pangea/dnd";
 import React from "react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import Loading from "../components/base/Loading";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { ISection } from "../types/sectionTypes";
 import Section from "../components/board/Section";
-import axios from "../api/axios";
 
 const mockData = [
   {
@@ -58,16 +57,29 @@ const mockData = [
   },
 ];
 
+interface IPayload {
+  updateId: string;
+  taskId: string;
+}
+
 const Board: React.FC = (): JSX.Element => {
   const params = useParams();
   const axios = useAxiosPrivate();
+  const queryClient = useQueryClient();
 
   const { data, isLoading } = useQuery("board-data", async () => {
     const response = await axios.get(`/boards/${params.id}`);
     return response.data;
   });
 
-  const { mutate } = useMutation((data) => axios.post("tasks/update", data));
+  const { mutate } = useMutation(
+    (payload: IPayload) => axios.put("/tasks/update", payload),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["board-data"] });
+      },
+    }
+  );
 
   const onDragEnd: OnDragEndResponder = ({ source, destination }) => {
     if (!destination) return;
@@ -77,11 +89,12 @@ const Board: React.FC = (): JSX.Element => {
 
     const task = tasks[source.index];
 
-    mutate({
-      updateId: destination?.droppableId,
-      removeId: source.droppableId,
+    const payload = {
+      updateId: destination.droppableId,
       taskId: task.id,
-    });
+    };
+
+    mutate(payload);
   };
 
   if (isLoading) return <Loading />;
