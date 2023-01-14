@@ -8,7 +8,7 @@ interface INewTask {
 const AddNewTask: React.FC<INewTask> = ({ addNewTask }): JSX.Element => {
   return (
     <div
-      className="flex border-dashed border-[0.5px] border-gray-500 justify-center items-center gap-2 mt-10 hover:opacity-80 cursor-pointer"
+      className="flex rounded-lg border-dashed border-[0.5px] border-gray-500 justify-center items-center gap-2 mt-10 hover:opacity-80 cursor-pointer"
       onClick={() => addNewTask()}
     >
       <span>Add new Task</span>

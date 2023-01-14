@@ -26,7 +26,6 @@ const StepRenderer: React.FC<IStepRender<INewTask>> = ({
     resolver: yupResolver(NewTaskSchema),
   });
 
-  console.log(isValid);
   useEffect(() => {
     trigger();
   }, [currentStep]);
@@ -86,22 +85,23 @@ const StepRenderer: React.FC<IStepRender<INewTask>> = ({
     case 2:
       return (
         <div className="mt-6 flex-col">
-          <Select
-            {...register("priority")}
-            options={[]}
-            onChange={(e) => setValue("priority", Number(e.target.value))}
-            error={Boolean(errors?.priority)}
-            infoLabel={errors?.priority?.message}
+          <Input
+            {...register("assignee")}
+            type="text"
+            placeholder="Assignee"
+            label="Assignee"
+            twind="w-[334px]"
+            error={Boolean(errors?.assignee)}
+            infoLabel={errors?.assignee?.message}
           />
+
           <div className="mt-4">
-            <Input
-              {...register("assignee")}
-              type="text"
-              placeholder="Assignee"
-              label="Assignee"
-              twind="w-[334px]"
-              error={Boolean(errors?.assignee)}
-              infoLabel={errors?.assignee?.message}
+            <Select
+              {...register("priority")}
+              options={[]}
+              onChange={(e) => setValue("priority", Number(e.target.value))}
+              error={Boolean(errors?.priority)}
+              infoLabel={errors?.priority?.message}
             />
           </div>
           <div className="flex justify-end mt-4 gap-2">

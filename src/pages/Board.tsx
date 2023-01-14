@@ -100,17 +100,18 @@ const Board: React.FC = (): JSX.Element => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="flex flex-row gap-4">
+    <div className="flex flex-row  gap-4">
       <DragDropContext onDragEnd={onDragEnd}>
         {data.board.sections.map((section: ISection) => (
           <Droppable key={section.id} droppableId={String(section.id)}>
             {(provided) => (
-              <div className="basis-1/2" ref={provided.innerRef}>
+              <div className="w-full" ref={provided.innerRef}>
                 <Section
                   {...provided.droppableProps}
                   name={section.name}
                   tasks={section.tasks}
                   id={section.id}
+                  boardId={params.id as string}
                 />
                 <span>{provided.placeholder}</span>
               </div>
