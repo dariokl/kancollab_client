@@ -83,11 +83,22 @@ const Board: React.FC = (): JSX.Element => {
 
   const onDragEnd: OnDragEndResponder = ({ source, destination }) => {
     if (!destination) return;
+
     const { tasks } = data.board.sections.find(
       (section: Record<string, string>) => section.id === source.droppableId
     );
 
     const task = tasks[source.index];
+
+    // Change destionation in current section.
+    if (destination.droppableId === source.droppableId) {
+      [tasks[destination.index], tasks[source.index]] = [
+        tasks[source.index],
+        tasks[destination.index],
+      ];
+
+      return;
+    }
 
     const payload = {
       updateId: destination.droppableId,
@@ -100,12 +111,12 @@ const Board: React.FC = (): JSX.Element => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="flex flex-row  gap-4">
+    <div className="grid grid-cols-3 gap-4">
       <DragDropContext onDragEnd={onDragEnd}>
         {data.board.sections.map((section: ISection) => (
           <Droppable key={section.id} droppableId={String(section.id)}>
             {(provided) => (
-              <div className="w-full" ref={provided.innerRef}>
+              <div ref={provided.innerRef}>
                 <Section
                   {...provided.droppableProps}
                   name={section.name}
