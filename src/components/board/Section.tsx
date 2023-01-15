@@ -70,6 +70,7 @@ const Section: React.FC<ISection> = ({
                   title={task.title}
                   description={task.description}
                   color={color()}
+                  priority={task.priority}
                 />
               </div>
             )}

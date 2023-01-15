@@ -1,21 +1,29 @@
 import React from "react";
 import IconButton from "../base/IconButton";
-import { RiEditBoxLine } from "react-icons/ri";
+import { MdOutlineOpenInNew } from "react-icons/md";
 
 interface ICard {
   title: string;
   description: string;
   color: string;
+  priority: number;
 }
 
-const Card: React.FC<ICard> = ({ title, description, color }): JSX.Element => {
+const Card: React.FC<ICard> = ({
+  title,
+  description,
+  color,
+  priority,
+}): JSX.Element => {
+  const priorityArray = Array.from({ length: 3 }, (x) => x);
+
   return (
     <div
       className={`w-54 mt-4 px-4 py-4 flex-col bg-white mb-2 rounded-r-md shadow-md text-sm border-l-2 border-l-${color}-500/50`}
     >
       <div className="flex justify-between items-center">
         <h6 className="font-bold">{title}</h6>
-        <IconButton icon={() => <RiEditBoxLine size={20} />} />
+        <IconButton icon={() => <MdOutlineOpenInNew size={20} />} />
       </div>
       <p className="break-words text-gray-600 word-break ">
         {description.length > 65
@@ -28,6 +36,15 @@ const Card: React.FC<ICard> = ({ title, description, color }): JSX.Element => {
           src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
           alt="Rounded avatar"
         />
+        <div className="w-18 h-6 mt-2 flex justify-end items-center px-2 ">
+          {priorityArray.map((_, index) => (
+            <span
+              className={`w-2 h-2 rounded-full ${
+                priority >= index + 1 ? "bg-red-400" : "bg-gray-400"
+              } mr-[0.5px]`}
+            />
+          ))}
+        </div>
         <div
           className={`flex justift-center items-center bg-${color}-100 w-18 h-6 rounded-md`}
         >
