@@ -9,7 +9,7 @@ import Sucess from "../alerts/Sucess";
 import AuthContent from "../AuthContent";
 import Button from "../base/Button";
 import Input from "../base/Input";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 interface IRegister {
   email: string;
@@ -27,8 +27,15 @@ const Register = () => {
     resolver: yupResolver(RegisterSchema),
   });
 
+  const navigate = useNavigate();
+
   const { mutate, isError, isSuccess, isLoading } = useMutation(
-    (submitData: IRegister) => axios.post("/auth/register", { ...submitData })
+    (submitData: IRegister) => axios.post("/auth/register", { ...submitData }),
+    {
+      onSuccess: () => {
+        navigate("/login");
+      },
+    }
   );
 
   const onSubmit: SubmitHandler<IRegister> = (data) => {

@@ -7,6 +7,7 @@ interface ICard {
   description: string;
   color: string;
   priority: number;
+  assignee: string;
 }
 
 const Card: React.FC<ICard> = ({
@@ -14,8 +15,20 @@ const Card: React.FC<ICard> = ({
   description,
   color,
   priority,
+  assignee,
 }): JSX.Element => {
   const priorityArray = Array.from({ length: 3 }, (x) => x);
+
+  const priorityValue = () => {
+    switch (priority) {
+      case 1:
+        return "Low";
+      case 2:
+        return "Medium";
+      case 3:
+        return "High";
+    }
+  };
 
   return (
     <div
@@ -30,13 +43,19 @@ const Card: React.FC<ICard> = ({
           ? description.slice(0, 64) + "..."
           : description}
       </p>
-      <div className="mt-4 flex justify-between items-center">
+      <div
+        className="mt-4 flex justify-between items-center group cursor-pointer"
+        title={`Assignee : ${assignee}`}
+      >
         <img
           className="w-6 h-6 rounded-full"
           src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
           alt="Rounded avatar"
         />
-        <div className="w-18 h-6 mt-2 flex justify-end items-center px-2 ">
+        <div
+          className="w-18 h-6 mt-2 flex justify-end items-center px-2 "
+          title={`Priority: ${priorityValue()}`}
+        >
           {priorityArray.map((_, index) => (
             <span
               className={`w-2 h-2 rounded-full ${
