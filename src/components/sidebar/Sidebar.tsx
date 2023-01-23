@@ -16,6 +16,8 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen, setIsOpen }): JSX.Element => {
     localStorage.removeItem("refreshToken");
     dispatch({ type: "LOGOUT" });
   };
+
+  console.log(state);
   return (
     <main
       className={
@@ -34,11 +36,12 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen, setIsOpen }): JSX.Element => {
         <article className="relative pb-10 flex flex-col h-full">
           <div className="w-40 ml-2 mt-2 py-2 rounded-lg flex gap-1 items-center bg-slate-100">
             <img
-              src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
+              src={state?.user?.avatar}
               width={32}
               height={32}
+              className="rounded-full"
             />
-            <span className="text-sm">{state?.user?.email}</span>
+            <span className="ml-2 text-sm">{state?.user?.email}</span>
           </div>
           <div className="px-2 mt-4 inset-0 flex items-center">
             <div className="w-full border-b border-gray-400"></div>

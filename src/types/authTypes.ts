@@ -1,5 +1,6 @@
 interface IMe {
   email: string;
+  avatar: string;
 }
 
 export interface IAuthState {

@@ -71,7 +71,8 @@ const Section: React.FC<ISection> = ({
                   description={task.description}
                   color={color()}
                   priority={task.priority}
-                  assignee={task.assignee}
+                  assigneeMail={task?.user?.email}
+                  assigneeAvatar={task?.user?.avatar}
                 />
               </div>
             )}

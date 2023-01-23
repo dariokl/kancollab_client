@@ -1,4 +1,5 @@
 import React from "react";
+
 import IconButton from "../base/IconButton";
 import { MdOutlineOpenInNew } from "react-icons/md";
 
@@ -7,7 +8,8 @@ interface ICard {
   description: string;
   color: string;
   priority: number;
-  assignee: string;
+  assigneeMail: string;
+  assigneeAvatar: string;
 }
 
 const Card: React.FC<ICard> = ({
@@ -15,7 +17,8 @@ const Card: React.FC<ICard> = ({
   description,
   color,
   priority,
-  assignee,
+  assigneeMail,
+  assigneeAvatar,
 }): JSX.Element => {
   const priorityArray = Array.from({ length: 3 }, (x) => x);
 
@@ -45,11 +48,11 @@ const Card: React.FC<ICard> = ({
       </p>
       <div
         className="mt-4 flex justify-between items-center group cursor-pointer"
-        title={`Assignee : ${assignee}`}
+        title={`Assignee : ${assigneeMail}`}
       >
         <img
           className="w-6 h-6 rounded-full"
-          src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
+          src={`${assigneeAvatar}`}
           alt="Rounded avatar"
         />
         <div
