@@ -9,6 +9,7 @@ interface ISidebar {
   isOpen: boolean;
   setIsOpen: EffectCallback;
 }
+
 const Sidebar: React.FC<ISidebar> = ({ isOpen, setIsOpen }): JSX.Element => {
   const { state, dispatch } = useAuth();
   const handleLogoutClick = () => {
@@ -17,7 +18,6 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen, setIsOpen }): JSX.Element => {
     dispatch({ type: "LOGOUT" });
   };
 
-  console.log(state);
   return (
     <main
       className={
