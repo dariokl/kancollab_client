@@ -44,7 +44,7 @@ const Card: React.FC<ICard> = ({
           ? description.slice(0, 64) + "..."
           : description}
       </p>
-      <div className="mt-4 flex justify-between items-center group">
+      <div className="mt-4 flex justify-between items-center">
         <img
           className="w-6 h-6 rounded-full cursor-pointer"
           src={`${assigneeAvatar}`}

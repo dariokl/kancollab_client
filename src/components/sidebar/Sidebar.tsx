@@ -35,12 +35,7 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen, setIsOpen }): JSX.Element => {
       >
         <article className="relative pb-10 flex flex-col h-full">
           <div className="w-40 ml-2 mt-2 py-2 rounded-lg flex gap-1 items-center bg-slate-100">
-            <img
-              src={state?.user?.avatar}
-              width={32}
-              height={32}
-              className="rounded-full"
-            />
+            <img src={state?.user?.avatar} width={32} height={32} />
             <span className="ml-2 text-sm">{state?.user?.email}</span>
           </div>
           <div className="px-2 mt-4 inset-0 flex items-center">
