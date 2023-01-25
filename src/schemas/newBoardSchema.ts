@@ -5,11 +5,6 @@ export const NewBoardSchema = yup.object().shape({
     .string()
     .required("Name is required.")
     .max(24, "Name must be less than 24 characters."),
-  description: yup
-    .string()
-    .required("Description is required.")
-    .min(24, "Description must be at least 24 characters.")
-    .max(256, "Description must be less than 256 characters"),
   members: yup
     .array()
     .of(yup.string().email(({ value }) => `${value} is not valid email.`))

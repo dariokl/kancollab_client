@@ -1,22 +1,31 @@
 import { useState } from "react";
-import {
-  IoIosArrowRoundBack,
-  IoIosCheckmarkCircle,
-  IoIosPaper,
-} from "react-icons/io";
-import { useMutation, useQueryClient } from "react-query";
+import { IoIosArrowRoundBack, IoIosPaper } from "react-icons/io";
+import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
-import IconButton from "../../base/IconButton";
-import StepRenderer from "./StepRenderer";
-import StepperProgress from "../../StepperProgress";
 import { INewBoard } from "../../../types/boardTypes";
+import EmailListInput from "../../base/EmailListInput";
+import IconButton from "../../base/IconButton";
+import Input from "../../base/Input";
+import { IoIosPaperPlane } from "react-icons/io";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { NewTaskSchema } from "../../../schemas/newTasksSchema";
 
 const NewBoard = () => {
-  const steps: string[] = ["Name", "Description", "Members"];
-  const [currentStep, setCurrentStep] = useState<number>(0);
   const axios = useAxiosPrivate();
   const navigate = useNavigate();
+
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm<INewBoard>({
+    mode: "onBlur",
+    resolver: yupResolver(NewTaskSchema),
+  });
 
   const { mutate, isLoading } = useMutation(
     (submitData: INewBoard) => axios.post("/boards/create", { ...submitData }),
@@ -27,7 +36,7 @@ const NewBoard = () => {
     }
   );
 
-  const handleSubmit = (data: INewBoard) => {
+  const onSubmit = (data: INewBoard) => {
     mutate(data);
   };
 
@@ -48,17 +57,27 @@ const NewBoard = () => {
             <h6 className="font-bold text-md">Create new Board</h6>
             <p className="text-xs mt-2 tracking-wide text-gray-600">
               Create a new board,add your team members.Creating new board will
-              automatically generate a wiki page for your project.
+              automatically generate page for your board.
             </p>
-            <span className="mt-2 border-b-[0.5px] border-gray-500" />
-            <StepperProgress steps={steps} currentStep={currentStep} />
-
-            <StepRenderer
-              currentStep={currentStep}
-              setCurrentStep={(step: number) => setCurrentStep(step)}
-              onFormSubmit={(data) => handleSubmit(data)}
-              isLoading={isLoading}
-            />
+            <span className="mt-4 border-b-[0.5px] border-gray-500" />
+            <form className="flex-col mt-6" onSubmit={handleSubmit(onSubmit)}>
+              <Input
+                {...register("name")}
+                type="text"
+                placeholder="Board Name"
+                label="Board Name"
+                twind="w-[328px]"
+              />
+              <span className="m-4" />
+              <EmailListInput />
+              <div className="flex justify-end mt-4">
+                <IconButton
+                  title="Create Board"
+                  type="submit"
+                  icon={() => <IoIosPaperPlane color="#2563eb" size={20} />}
+                />
+              </div>
+            </form>
           </div>
         </div>
       </div>

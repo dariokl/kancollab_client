@@ -1,6 +1,5 @@
 export interface INewBoard {
   name: string;
-  description: string;
   members: string[];
 }
 

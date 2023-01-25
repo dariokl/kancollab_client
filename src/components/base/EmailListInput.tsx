@@ -11,85 +11,62 @@ interface ITagInput {
   defaultValue?: string[];
 }
 
-const regexExp =
-  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
-
 const EmailListInput = forwardRef<HTMLInputElement, ITagInput>(
   (
     { label, error, infoLabel, setValue, defaultValue, errorsObject, ...props },
     ref
   ) => {
-    const [tags, setTags] = useState<string[]>(defaultValue ?? []);
+    const [tags, setTags] = useState<string[]>([]);
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === "Enter") {
-        const target = e.target as HTMLInputElement;
-        setTags((prev) => [...prev, target.value]);
-        target.blur();
+    const handleTags = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+      const target = event.target as HTMLInputElement;
+      const key = event.key;
+      if (event.key === "Enter" && target.value !== "") {
+        setTags([...tags, target.value]);
+        target.value = "";
+      } else if (
+        event.key === "Backspace" &&
+        tags.length &&
+        target.value === ""
+      ) {
+        const tagsCopy = [...tags];
+        tagsCopy.pop();
+        event.preventDefault();
+        setTags(tagsCopy);
       }
     };
 
-    useEffect(() => {
-      setValue(tags);
-    }, [tags]);
-
-    const errors = useMemo(() => {
-      if (errorsObject && errorsObject.length) {
-        // @ts-ignore
-        const obj = errorsObject.map((error, index) => (
-          <div className="flex-col" key={index}>
-            <p className="mt-1">{error?.message}</p>
-          </div>
-        ));
-        return obj.length > 3 ? "Invalid emails provided." : obj;
-      } else {
-        return errorsObject?.message;
-      }
-    }, [errorsObject]);
+    const removeTags = (index: number): void => {
+      setTags([...tags.filter((tag) => tags.indexOf(tag) !== index)]);
+    };
 
     return (
-      <div className="flex-col">
-        <div className="relative flex flex-wrap-reverse justify-start items-center text-inherit border border-gray-300 text-gray-900 text-sm rounded-lg focus-within:ring-blue-500 focus-within:border-blue-500 ">
-          {tags.map((tag, idx) => (
+      <div className="relative">
+        <div className="flex flex-wrap overflow-hidden text-black border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus-within:ring-blue-500 focus-within:border-blue-500 focus-within:outline-none">
+          {tags.map((tag, index) => (
             <div
-              className="px-2 py-2 mt-2 ml-2 bg-green-400/70 rounded-md h-6 w-fit flex items-center mb-2"
-              key={idx}
+              className="flex shadow-sm items-center px-1 py-1 ml-1 rounded-md whitespace-no-wrap bg-green-400/60"
+              key={index}
             >
-              <span className="text-xs flex items-center">
-                <p>{tag.length > 20 ? tag.slice(0, 19) + "..." : tag}</p>
-                <IoIosCloseCircle
-                  size={16}
-                  className="ml-1 text-slate-800/90 cursor-pointer"
-                  onClick={() =>
-                    setTags((prev) => prev.filter((item) => item != tag))
-                  }
-                />
-              </span>
+              <span className="text-xs px-1">{tag}</span>
+              <IoIosCloseCircle
+                className="ml-1 cursor-pointer"
+                onClick={() => removeTags(index)}
+              />
             </div>
           ))}
-
-          <div>
-            <input
-              {...props}
-              ref={ref}
-              className="peer placeholder-transparent mt-2 ml-2 outline-none border-none h-12 text-white focus:text-inherit"
-              placeholder="Add Project Members"
-              onKeyDown={(e) => {
-                handleKeyDown(e);
-              }}
-              type="text"
-              onBlur={(e) => (e.target.value = `...`)}
-              onFocus={(e) => (e.target.value = "")}
-            />
-            <label className="absolute text-sm text-gray-400 duration-300 transform -translate-y-5 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">
-              {label}
-            </label>
-          </div>
+          <input
+            className="w-[326px] ml-1 mt-2 border-none peer outline-none text-inherit "
+            type="text"
+            placeholder="Type email and press Enter."
+            onKeyDown={(e) => handleTags(e)}
+          />
         </div>
-        <span className={`${error ? "text-red-800/90" : ""} text-xs mt-2`}>
-          {infoLabel}
-          {errors}
-        </span>
+        <label className="absolute text-sm text-gray-400 peer-focus:text-blue-600 bg-white duration-300 transform -translate-y-4 scale-75 top-2 origin-[4]">
+          Members
+        </label>
+
+        <div className="error">{error}</div>
       </div>
     );
   }
