@@ -51,7 +51,7 @@ const Input = forwardRef<HTMLInputElement, Iinterface>(
             {type === "password" && eye()}
           </span>
         </div>
-        <span className={`${error ? "text-red-800/90" : ""} text-xs`}>
+        <span className={`${error ? "text-red-600" : ""} text-xs`}>
           {infoLabel}
         </span>
       </div>

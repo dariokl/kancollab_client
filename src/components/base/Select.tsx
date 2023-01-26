@@ -45,7 +45,7 @@ const Select = forwardRef<HTMLInputElement, Iinterface>(
             </option>
           ))}
         </select>
-        <span className={`${error ? "text-red-800/90" : ""} text-xs`}>
+        <span className={`${error ? "text-red-600" : ""} text-xs`}>
           {infoLabel}
         </span>
       </div>
