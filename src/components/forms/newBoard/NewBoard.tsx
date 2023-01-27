@@ -11,6 +11,7 @@ import { IoIosPaperPlane } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { NewTaskSchema } from "../../../schemas/newTasksSchema";
+import { NewBoardSchema } from "../../../schemas/newBoardSchema";
 
 const NewBoard = () => {
   const axios = useAxiosPrivate();
@@ -24,7 +25,7 @@ const NewBoard = () => {
     formState: { errors },
   } = useForm<INewBoard>({
     mode: "onBlur",
-    resolver: yupResolver(NewTaskSchema),
+    resolver: yupResolver(NewBoardSchema),
   });
 
   const { mutate, isLoading } = useMutation(
@@ -41,7 +42,7 @@ const NewBoard = () => {
   };
 
   return (
-    <div className="flex justify-center items-center w-full h-full mt-2 mb-2">
+    <div className="flex justify-center items-center mt-8 mb-2">
       <div className="bg-white w-1/2 shadow-md rounded-lg">
         <div className="py-6 px-6 flex flex-col">
           <div className="flex justify-end">
@@ -69,7 +70,11 @@ const NewBoard = () => {
                 twind="w-[328px]"
               />
               <span className="m-4" />
-              <EmailListInput />
+              <EmailListInput
+                setValue={(members) =>
+                  setValue("members", members, { shouldValidate: true })
+                }
+              />
               <div className="flex justify-end mt-4">
                 <IconButton
                   title="Create Board"

@@ -33,7 +33,7 @@ const NewTask = () => {
   };
 
   return (
-    <div className="flex justify-center items-center w-full h-full mt-2 mb-2">
+    <div className="flex justify-center items-center mt-2 mb-2">
       <div className="bg-white w-1/2 shadow-md rounded-lg">
         <div className="py-6 px-6 flex flex-col">
           <div className="flex justify-end">
