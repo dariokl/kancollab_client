@@ -26,6 +26,7 @@ const Select = forwardRef<HTMLInputElement, Iinterface>(
       { value: 3, name: "High" },
     ];
 
+    // TODO: Fix twind property to work with both regular and added styles.
     return (
       <div className="flex-col">
         <select
