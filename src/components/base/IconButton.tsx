@@ -22,7 +22,9 @@ const IconButton: React.FC<IButton> = ({
     <button
       title={title}
       type={type}
-      className={`${twind} flex justify-center items-center h-8 w-8 hover:bg-gray-200 rounded-lg cursor-pointer`}
+      className={`${
+        twind ? twind : "w-8 hover:bg-gray-200"
+      } flex justify-center items-center h-8 rounded-lg cursor-pointer`}
       onClick={onClick}
     >
       {icon && React.createElement(icon)}
