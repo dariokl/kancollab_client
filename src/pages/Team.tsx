@@ -9,7 +9,7 @@ const Team = () => {
   // Used for dummy data
   const user = useAuth();
 
-  const dummyUserArray = Array.from({ length: 3 }, (x) => x);
+  const dummyUserArray = Array.from({ length: 10 }, (x) => x);
   return (
     <div className="flex-col justify-center mt-6 px-16">
       <div className="flex justify-between mb-4">

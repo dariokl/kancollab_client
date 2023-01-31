@@ -8,7 +8,7 @@ const AuthContent = () => {
       <ul>
         <li className="flex items-center gap-2 mb-6">
           <span className="text-blue-600">
-            <FaFlipboard />
+            <FaFlipboard size={20} />
           </span>
           <span className="font-bold text-xl">Kancollab.</span>
         </li>

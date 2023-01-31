@@ -44,7 +44,10 @@ const NewTask = () => {
           </div>
           <div className="flex flex-col border-solid">
             <div className="bg-blue-100 w-fit h-10 w-10 rounded-full flex justify-center items-center mb-2">
-              <IoIosClipboard className="text-blue-600 rounded-lg" size={20} />
+              <IoIosClipboard
+                className="text-blue-600 w-10 rounded-lg"
+                size={20}
+              />
             </div>
             <h6 className="font-bold text-md">Create new Task</h6>
             <p className="text-xs mt-2 tracking-wide text-gray-600">

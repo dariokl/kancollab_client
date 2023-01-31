@@ -46,16 +46,22 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen, setIsOpen }): JSX.Element => {
             <ul className="py-2 px-2 space-y-2">
               <li>
                 <Link to="/home">
-                  <LinkItem icon={IoIosHome} text="Home" />
+                  <LinkItem icon={() => <IoIosHome size={20} />} text="Home" />
                 </Link>
               </li>
               <li>
                 <Link to="/board">
-                  <LinkItem icon={MdSpaceDashboard} text="Board" />
+                  <LinkItem
+                    icon={() => <MdSpaceDashboard size={20} />}
+                    text="Board"
+                  />
                 </Link>
 
                 <Link to="/team">
-                  <LinkItem icon={IoIosPeople} text="Team" />
+                  <LinkItem
+                    icon={() => <IoIosPeople size={20} />}
+                    text="Team"
+                  />
                 </Link>
               </li>
             </ul>
@@ -65,7 +71,7 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen, setIsOpen }): JSX.Element => {
               className="w-full cursor-pointer hover:border-r-2 hover:border-red-400 rounded-md h-8 w-40 px-2 flex items-center justify-start hover:bg-slate-100 gap-2"
               onClick={() => handleLogoutClick()}
             >
-              <IoIosLogOut className="text-gray-600" />
+              <IoIosLogOut className="text-gray-600" size={20} />
               <span className="text-sm text-gray-700 font-semibold">
                 Logout
               </span>

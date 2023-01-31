@@ -51,7 +51,7 @@ const Register = () => {
       <div className="flex-grow flex items-center justify-center border-1">
         <div className="flex-col space-y-4 bg-white h-full rounded-lg shadow-md px-12 py-12 ">
           <div className="bg-blue-100 w-fit h-10 w-10 rounded-full flex justify-center items-center">
-            <IoIosLock className="text-blue-600 rounded-lg" size={20} />
+            <IoIosLock className="text-blue-600 rounded-lg w-10" size={20} />
           </div>
           <div className="text-md font-semibold">Register to Kancollab</div>
           <div className="text-xs text-gray-600">Start collaborating.</div>

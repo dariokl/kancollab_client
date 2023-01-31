@@ -26,7 +26,7 @@ const Home = () => {
 
   return (
     <div className="flex justify-center h-full items-center">
-      {data.length ? (
+      {!data.length ? (
         <div className="flex align-center items-center justify-center w-1/2 h-1/6 border-dashed bg-slate-200 border-2 border-slate-300 rounded-lg m-4 opacity-80 hover:opacity-100">
           <Link to="/create-board">
             <span className="text-xs font-bold cursor-pointer">

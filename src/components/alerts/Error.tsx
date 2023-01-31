@@ -8,7 +8,7 @@ const Error = ({ message }: { message: string }): JSX.Element => {
       role="alert"
     >
       <div className="flex items-center justify-center">
-        <IoIosAlert />
+        <IoIosAlert size={12} />
         <span className="sr-only">Info</span>
         <h3 className="text-xs ml-2  ">{message}</h3>
       </div>
