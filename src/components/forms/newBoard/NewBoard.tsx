@@ -42,9 +42,9 @@ const NewBoard = () => {
   };
 
   return (
-    <div className="flex justify-center items-center mt-8 mb-2">
+    <div className="flex justify-center items-center mt-6 mb-2">
       <div className="bg-white w-1/2 shadow-md rounded-lg">
-        <div className="py-6 px-6 flex flex-col">
+        <div className="py-4 px-6 flex flex-col">
           <div className="flex justify-end">
             <IconButton
               icon={IoIosArrowRoundBack}

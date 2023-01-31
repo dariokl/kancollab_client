@@ -1,5 +1,5 @@
 import React, { EffectCallback } from "react";
-import { IoIosHome, IoIosLogOut } from "react-icons/io";
+import { IoIosHome, IoIosLogOut, IoIosPeople } from "react-icons/io";
 import useAuth from "../../hooks/useAuth";
 import { Link, useLocation } from "react-router-dom";
 import LinkItem from "./LinkItem";
@@ -52,6 +52,10 @@ const Sidebar: React.FC<ISidebar> = ({ isOpen, setIsOpen }): JSX.Element => {
               <li>
                 <Link to="/board">
                   <LinkItem icon={MdSpaceDashboard} text="Board" />
+                </Link>
+
+                <Link to="/team">
+                  <LinkItem icon={IoIosPeople} text="Team" />
                 </Link>
               </li>
             </ul>

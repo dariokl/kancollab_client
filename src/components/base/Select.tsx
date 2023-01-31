@@ -20,7 +20,7 @@ const Select = forwardRef<HTMLInputElement, Iinterface>(
     ref
   ) => {
     const options = [
-      { value: 0, name: "Select Priority..." },
+      { value: 0, name: placeholder ?? "Select value..." },
       { value: 1, name: "Low" },
       { value: 2, name: "Medium" },
       { value: 3, name: "High" },
@@ -33,7 +33,7 @@ const Select = forwardRef<HTMLInputElement, Iinterface>(
           onChange={onChange}
           defaultValue={0}
           placeholder="Select Priority..."
-          className="w-[334px] bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          className={`${twind} border outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5`}
         >
           {options.map((option, index) => (
             <option

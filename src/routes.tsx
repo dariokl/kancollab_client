@@ -7,6 +7,7 @@ import NewBoard from "./components/forms/newBoard/NewBoard";
 import NewTask from "./components/forms/newTask/NewTask";
 import Board from "./pages/Board";
 import Home from "./pages/Home";
+import Team from "./pages/Team";
 
 const Router = () => {
   return useRoutes([
@@ -28,6 +29,10 @@ const Router = () => {
         {
           path: "/board/:id",
           element: <Board />,
+        },
+        {
+          path: "/team",
+          element: <Team />,
         },
         {
           path: "/create-board",

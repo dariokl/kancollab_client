@@ -5,6 +5,8 @@ interface IButton {
   icon: IconType;
   title?: string;
   type?: "button" | "submit";
+  twind?: string;
+  text?: string;
   onClick?: () => void;
 }
 
@@ -13,15 +15,18 @@ const IconButton: React.FC<IButton> = ({
   onClick,
   type = "button",
   title,
+  twind,
+  text,
 }) => {
   return (
     <button
       title={title}
       type={type}
-      className="flex justify-center items-center h-8 w-8 hover:bg-gray-200 rounded-lg cursor-pointer"
+      className={`${twind} flex justify-center items-center h-8 w-8 hover:bg-gray-200 rounded-lg cursor-pointer`}
       onClick={onClick}
     >
       {icon && React.createElement(icon)}
+      {text}
     </button>
   );
 };

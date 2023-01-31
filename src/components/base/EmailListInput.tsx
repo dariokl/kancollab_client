@@ -32,6 +32,7 @@ const EmailListInput = forwardRef<HTMLInputElement, ITagInput>(
       const target = event.target as HTMLInputElement;
       const key = event.key;
       if (event.key === "Enter" && target.value !== "") {
+        event.preventDefault();
         if (!emails.includes(target.value)) {
           setEmails([...emails, target.value]);
           setValue([...emails, target.value]);
