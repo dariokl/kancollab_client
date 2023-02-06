@@ -9,6 +9,7 @@ import Board from "./pages/Board";
 import Home from "./pages/Home";
 import Team from "./pages/Team";
 
+// TODO: Consider using modal for forms if it can fit the view.
 const Router = () => {
   return useRoutes([
     {

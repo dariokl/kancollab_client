@@ -18,7 +18,7 @@ const ContainerItem: React.FC<IContainerItem> = ({ id, name, owner }) => {
       <div className="flex items-center px-6 py-3 justify-between gap-2">
         <div className="flex justify-center items-center">
           <div className="flex items-center bg-blue-600 rounded h-6 w-6 p-1 justify-around">
-            <MdDashboard color="white" />
+            <MdDashboard color="white" size={20} />
           </div>
           <div className="font-bold text-gray-600 ml-1 mt-1 uppercase text-xs tracking-widest">
             <span>{name} </span>
