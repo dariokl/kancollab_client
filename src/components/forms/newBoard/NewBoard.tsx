@@ -71,6 +71,7 @@ const NewBoard = () => {
               />
               <span className="m-4" />
               <EmailListInput
+                label="Members"
                 setValue={(members) =>
                   setValue("members", members, { shouldValidate: true })
                 }

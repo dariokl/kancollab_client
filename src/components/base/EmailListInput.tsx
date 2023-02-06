@@ -4,11 +4,12 @@ import { IoIosCloseCircle } from "react-icons/io";
 
 interface ITagInput {
   setValue: (value: string[]) => void;
+  label: string;
   error?: boolean;
 }
 
 const EmailListInput = forwardRef<HTMLInputElement, ITagInput>(
-  ({ error, setValue, ...props }, ref) => {
+  ({ error, setValue, label, ...props }, ref) => {
     const [emails, setEmails] = useState<string[]>([]);
 
     const invalidEmails = useMemo(() => {
@@ -85,7 +86,7 @@ const EmailListInput = forwardRef<HTMLInputElement, ITagInput>(
             onKeyDown={(e) => handleEmails(e)}
           />
           <label className="absolute bg-white text-gray-400 bg-white -translate-y-4 -translate-x-4 px-2 top-1 peer-focus:text-blue-600 scale-75 ">
-            Members
+            {label}
           </label>
         </div>
         <div className="flex-col word-break mt-2">

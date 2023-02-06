@@ -8,6 +8,7 @@ import NewTask from "./components/forms/newTask/NewTask";
 import Board from "./pages/Board";
 import Home from "./pages/Home";
 import Team from "./pages/Team";
+import NewMember from "./components/forms/newMember/NewMember";
 
 // TODO: Consider using modal for forms if it can fit the view.
 const Router = () => {
@@ -42,6 +43,10 @@ const Router = () => {
         {
           path: "/create-new-task",
           element: <NewTask />,
+        },
+        {
+          path: "/add-member",
+          element: <NewMember />,
         },
       ],
     },
